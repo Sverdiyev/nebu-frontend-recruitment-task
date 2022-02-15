@@ -1,0 +1,25 @@
+{
+	"users": [
+		{
+			"id": 1,
+			"username": "John Smith",
+			"email": "john.smith@gmail.com",
+			"password": "john@123",
+			"follow": [2,3]
+		},
+		{
+			"id": 2,
+			"username": "Alice Doe",
+			"email": "alice.doe@gmail.com",
+			"password": "alice@123",
+			"follow": []
+		},
+		{
+			"id": 3,
+			"username": "Cathy Lee",
+			"email": "cathy.lee@gmail.com",
+			"password": "cathy@123",
+			"follow": [1]
+		}
+	] 
+}
