@@ -6,7 +6,14 @@ import login from './login.png';
 import spiral from './spiral/spiral.png';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword.js';
 import Button from './components/Button/Button.js';
+import Heading from './components/Heading/Heading.js';
 
+const buttonTypes = {
+	signIn: 'signIn',
+	signUp: 'signUp',
+	switchToSignUp: 'switchToSignUp',
+	switchToSignIn: 'switchToSignIn',
+};
 function App() {
 	/**
 	 * open console to see how backend is structured
@@ -19,17 +26,17 @@ function App() {
 
 	return (
 		<div className='App'>
-			<Card>
-				<h1>Sign In</h1>
-				<h4>Stay updated on professional word </h4>
-				<Email />
-				<Password />
-				<ForgotPassword />
-				<Button />
-				OR
-				<Button />
-			</Card>
-
+			<div style={{ display: 'flex', alignItems: 'flex-start' }}>
+				<Card>
+					<Heading></Heading> <Email />
+					<Password />
+					<ForgotPassword />
+					<Button type={buttonTypes.signIn} />
+					or
+					<Button type={buttonTypes.switchToSignUp} />
+				</Card>
+				<img src={login} alt='login' />
+			</div>
 			<div className='content'>
 				<h1>Zadanie 1</h1>
 				<p>
