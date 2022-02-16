@@ -2,7 +2,6 @@ import React from 'react';
 import StyledButton from './Button.styles.js';
 
 function Button({ type }) {
-	console.log('🚀 ~ Button ~ type', type);
 	const text = {
 		signIn: 'Sign in',
 		signUp: 'Sign up',

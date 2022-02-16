@@ -7,6 +7,7 @@ import spiral from './spiral/spiral.png';
 import ForgotPassword from './components/ForgotPassword/ForgotPassword.js';
 import Button from './components/Button/Button.js';
 import Heading from './components/Heading/Heading.js';
+import Line from './components/Line/Line.js';
 
 const buttonTypes = {
 	signIn: 'signIn',
@@ -32,7 +33,7 @@ function App() {
 					<Password />
 					<ForgotPassword />
 					<Button type={buttonTypes.signIn} />
-					or
+					<Line />
 					<Button type={buttonTypes.switchToSignUp} />
 				</Card>
 				<img src={login} alt='login' />
