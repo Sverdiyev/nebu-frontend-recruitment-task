@@ -5,7 +5,7 @@ const StyledButton = styled.button`
 	width: 100%;
 	padding: 13px 0;
 	margin: 6px 0;
-
+	cursor: pointer;
 	border: none;
 	font-weight: 500;
 	${({ $type }) => {

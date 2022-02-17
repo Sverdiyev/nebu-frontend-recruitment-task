@@ -1,24 +1,28 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 const pages = { signIn: 'signIn', signUp: 'signUp' };
-const initialState = { page: pages.signIn };
+const initialState = {
+	page: pages.signIn,
+	passwordVisible: false,
+	isAuth: false,
+};
 
-const loginSlice = createSlice({
+const pageSlice = createSlice({
 	name: 'login',
 	initialState,
 	reducers: {
-		switchToSignIn(state) {
-			state.page = pages.signIn;
+		switchPage(state) {
+			if (state.page === pages.signIn) state.page = pages.signUp;
+			else state.page = pages.signIn;
 		},
-		switchToSignUp(state) {
-			state.page = pages.signUp;
+		login(state) {
+			state.isAuth = true;
 		},
-		login(state) {},
 		showPassword() {},
 	},
 });
 
-const store = configureStore({ reducer: loginSlice.reducer });
+const store = configureStore({ reducer: pageSlice.reducer });
 
-export const loginActions = loginSlice.actions;
+export const pageActions = pageSlice.actions;
 export default store;
