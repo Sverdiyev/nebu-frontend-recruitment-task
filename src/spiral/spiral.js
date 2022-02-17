@@ -6,57 +6,57 @@ export class SpiralSort {
 	sort() {
 		let result = [];
 
+		let colStart = 0;
+		let colEnd = this._array[0].length - 1;
+		let rowStart = 0;
+		let rowEnd = this._array.length - 1;
+		const finalLength = this._array.length * this._array[0].length;
+		let col = 0;
 		let row = 0;
-		let column = 0;
-		let width = this._array[0].length;
-		let height = this._array.length;
-		let maxWidth = this._array[0].length;
-		let maxHeight = this._array.length;
-		let dir = 'right';
 
-		let counter = 0;
-		while (result.length <= maxHeight * maxWidth && counter < 2) {
-			counter++;
-			while (column < width) {
-				result.push(this._array[row][column]);
+		while (result.length < finalLength) {
+			//to right
+			for (let i = colStart; i <= colEnd && result.length < finalLength; i++) {
+				result.push(this._array[row][col]);
 
-				if (column === width - 1) {
-					dir = 'down';
+				if (col === colEnd) {
 					row++;
-				} else column++;
+					colEnd--;
+				} else col++;
+			}
+			//down
+			for (let i = row; i <= rowEnd && result.length < finalLength; i++) {
+				result.push(this._array[row][col]);
+				if (row === rowEnd) {
+					col--;
+					rowStart++;
+					// rowEnd--;
+				} else row++;
 			}
 
-			while (row < height) {
-				result.push(this._array[row][column]);
-				if (row === height - 1) {
-					dir = 'left';
-					column--;
-					height--;
-				}
-				row++;
-			}
+			//left
+			for (let i = col; i >= colStart && result.length < finalLength; i--) {
+				result.push(this._array[row][col]);
 
-			// while (column >= maxWidth - width) {
-			// 	result.push(this._array[row][column]);
-			// 	if (column === maxWidth - width) {
-			// 		dir = 'up';
-			// 		row--;
-			// 		width--;
-			// 	} else column--;
-			// }
-			// while (row >= maxHeight - height) {
-			// 	result.push(this._array[row][column]);
-			// 	if (row === maxHeight - height) {
-			// 		dir = 'right';
-			// 		column++;
-			// 	} else row--;
-			// }
+				if (col === colStart) {
+					row--;
+					colStart++;
+				} else col--;
+			}
+			//up
+
+			for (let i = row; i >= rowStart && result.length < finalLength; i--) {
+				result.push(this._array[row][col]);
+				if (row === rowStart) {
+					col++;
+					rowEnd--;
+				} else row--;
+			}
 		}
 
+		console.log('🚀 ~ sort ~ result', result);
 		return result;
 	}
 
 	moveHorizontal(row) {}
 }
-
-//array=[1,2,3,4,5,6,7,8,9]
