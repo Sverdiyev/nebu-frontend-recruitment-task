@@ -28,10 +28,9 @@ export const StyledInput = styled.input`
 
 	&:focus-visible,
 	:focus-visible ::placeholder {
-		outline-color: #656565;
+		outline: none;
 		color: #656565;
-
-		outline-width: 20px;
+		box-shadow: 0 0 8px rgba(82, 168, 236, 60%);
 		font-weight: 500;
 	}
 `;

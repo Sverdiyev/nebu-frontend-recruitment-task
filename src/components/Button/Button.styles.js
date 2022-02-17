@@ -8,26 +8,35 @@ const StyledButton = styled.button`
 	cursor: pointer;
 	border: none;
 	font-weight: 500;
+	outline: none;
+	transition: transform 3sec;
+	&:active {
+		transition: transform 2sec;
+		transform: translateY(5px);
+		transform: scale(98%);
+	}
+
 	${({ $type }) => {
 		switch ($type) {
 			case 'signUp':
 			case 'signIn':
-				return `color:white;
+				return `
+				color:white;
 				background-color:#0e66c2;
 				:focus-visible{
-					outline-color:#7cd3e6;
-				}
+					box-shadow: 0 0 10px rgba(82, 168, 236, 60%);
+				};
 					`;
 			case 'switchToSignUp':
 			case 'switchToSignIn':
 			default:
-				return `color:#606060;
-				background-color:white;
+				return `
+				color:#606060;
+				background-color:#fff;
 				border:1px solid #606060;
 				:focus-visible{
-					outline-color:#0e66c2;
-				};
-				
+					box-shadow: 0 0 10px rgba(82, 168, 236, 60%);
+				};	
 				`;
 		}
 	}};

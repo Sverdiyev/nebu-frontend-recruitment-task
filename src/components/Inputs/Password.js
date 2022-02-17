@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { InputWrapper, StyledInput, StyledShow } from './Input.styles.js';
+import InputWarning from '../InputWarining/InputWarning';
 
 function Password() {
 	const [type, setType] = useState('password');
@@ -10,6 +11,7 @@ function Password() {
 		if (type === 'password') setType('text');
 		if (type === 'text') setType('password');
 	};
+
 	let showText;
 	if (passwordInput.trim()) showText = type === 'password' ? 'show' : 'hide';
 
@@ -23,6 +25,7 @@ function Password() {
 				onChange={onChangeInput}
 			/>
 			{<StyledShow onClick={onChangeType}>{showText}</StyledShow>}
+			<InputWarning error>assad</InputWarning>
 		</InputWrapper>
 	);
 }

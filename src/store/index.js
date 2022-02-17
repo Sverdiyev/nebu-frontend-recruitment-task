@@ -3,7 +3,6 @@ import { configureStore, createSlice } from '@reduxjs/toolkit';
 const pages = { signIn: 'signIn', signUp: 'signUp' };
 const initialState = {
 	page: pages.signIn,
-	passwordVisible: false,
 	isAuth: false,
 };
 
@@ -18,7 +17,6 @@ const pageSlice = createSlice({
 		login(state) {
 			state.isAuth = true;
 		},
-		showPassword() {},
 	},
 });
 
