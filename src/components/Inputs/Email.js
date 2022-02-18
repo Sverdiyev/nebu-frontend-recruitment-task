@@ -6,15 +6,15 @@ import InputWarning from '../InputWarining/InputWarning.js';
 import { InputWrapper, StyledInput } from './Input.styles.js';
 
 function Email({ emailIsValid, emailIsTouched }) {
-	const { email } = useSelector((state) => state);
 	const dispatch = useDispatch();
+	const { email } = useSelector((state) => state);
 
 	const [error, setError] = useState(false);
 
 	const onChangeInput = (e) => {
 		emailIsTouched(true);
 		const email = e.target.value.trim();
-		dispatch(pageActions.setEmail({ email }));
+		dispatch(pageActions.setEmail(email));
 
 		if (!email) {
 			emailIsValid(false);
@@ -30,11 +30,11 @@ function Email({ emailIsValid, emailIsTouched }) {
 			<StyledInput
 				type='email'
 				placeholder='Email or Phone'
-				value={email}
 				onChange={onChangeInput}
+				value={email}
 			/>
 			<InputWarning error={error}>
-				Please enter valid email or phone
+				please enter valid email or phone{' '}
 			</InputWarning>
 		</InputWrapper>
 	);

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { pageActions } from '../../store/index.js';
 import InputWarning from '../InputWarining/InputWarning.js';
 import { InputWrapper, StyledInput } from './Input.styles.js';
@@ -7,12 +7,12 @@ import { InputWrapper, StyledInput } from './Input.styles.js';
 function Username({ usernameIsTouched, usernameIsValid }) {
 	const dispatch = useDispatch();
 	const [error, setError] = useState(false);
+	const { username } = useSelector((state) => state);
 
 	const onChangeInput = (e) => {
 		usernameIsTouched(true);
 		const username = e.target.value.trim();
-		console.log('🚀 ~ onChangeInput ~ username', username);
-		dispatch(pageActions.setUsername({ username: e.target.value }));
+		dispatch(pageActions.setUsername(e.target.value));
 
 		if (!username) {
 			usernameIsValid(false);
@@ -29,8 +29,9 @@ function Username({ usernameIsTouched, usernameIsValid }) {
 				type='text'
 				placeholder='Username'
 				onChange={onChangeInput}
+				value={username}
 			/>
-			<InputWarning error={error}>please enter valid username </InputWarning>
+			<InputWarning error={error}>Please enter valid username </InputWarning>
 		</InputWrapper>
 	);
 }
