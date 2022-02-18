@@ -37,9 +37,6 @@ export const StyledInput = styled.input`
 
 export const StyledShow = styled.span`
 	position: absolute;
-	/* width: 10%; */
-	/* height: 100%; */
-	/* display: inline-block; */
 
 	margin-left: 85%;
 	font-size: 12px;

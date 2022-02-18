@@ -1,19 +1,40 @@
 import React, { useState } from 'react';
 import { InputWrapper, StyledInput, StyledShow } from './Input.styles.js';
 import InputWarning from '../InputWarining/InputWarning';
+import { pageActions } from '../../store/index.js';
+import { useDispatch, useSelector } from 'react-redux';
 
-function Password() {
+function Password({ passwordIsValid, passwordIsTouched }) {
 	const [type, setType] = useState('password');
-	const [passwordInput, setPasswordInput] = useState('');
-	const onChangeInput = (e) => setPasswordInput(e.target.value);
+	const { password } = useSelector((state) => state);
+	const dispatch = useDispatch();
+
+	const [error, setError] = useState(false);
+
+	const onChangeInput = (e) => {
+		passwordIsTouched(true);
+		const password = e.target.value.trim();
+		console.log('🚀 ~ onChangeInput ~ password', password);
+		dispatch(pageActions.setPassword({ password: e.target.value }));
+
+		if (!password) {
+			passwordIsValid(false);
+			setError(true);
+			return;
+		}
+		setError(false);
+
+		passwordIsValid(true);
+	};
 
 	const onChangeType = () => {
 		if (type === 'password') setType('text');
 		if (type === 'text') setType('password');
 	};
 
-	let showText;
-	if (passwordInput.trim()) showText = type === 'password' ? 'show' : 'hide';
+	let showText = '';
+	if (password.trim()) showText = type === 'password' ? 'show' : 'hide';
+	console.log('🚀 ~ Password ~ error', error);
 
 	return (
 		<InputWrapper>
@@ -21,11 +42,11 @@ function Password() {
 				id='password'
 				type={type}
 				placeholder='Password'
-				value={passwordInput}
+				value={password}
 				onChange={onChangeInput}
 			/>
 			{<StyledShow onClick={onChangeType}>{showText}</StyledShow>}
-			<InputWarning error>assad</InputWarning>
+			<InputWarning error={error}>please enter valid password </InputWarning>
 		</InputWrapper>
 	);
 }

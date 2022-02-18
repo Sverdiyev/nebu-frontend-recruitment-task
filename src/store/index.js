@@ -1,21 +1,33 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
-const pages = { signIn: 'signIn', signUp: 'signUp' };
+// to add: logged in User, followed users,
+
 const initialState = {
-	page: pages.signIn,
 	isAuth: false,
+	username: '',
+	email: '',
+	password: '',
+	inputsTouched: false,
 };
 
 const pageSlice = createSlice({
 	name: 'login',
 	initialState,
 	reducers: {
-		switchPage(state) {
-			if (state.page === pages.signIn) state.page = pages.signUp;
-			else state.page = pages.signIn;
-		},
 		login(state) {
 			state.isAuth = true;
+		},
+		setUsername(state, { payload }) {
+			state.inputsTouched = true;
+			state.username = payload.username;
+		},
+		setPassword(state, { payload }) {
+			state.inputsTouched = true;
+			state.password = payload.password;
+		},
+		setEmail(state, { payload }) {
+			state.inputsTouched = true;
+			state.email = payload.email;
 		},
 	},
 });
