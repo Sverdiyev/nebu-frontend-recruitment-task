@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import Button from '../components/Button/Button.js';
 import ForgotPassword from '../components/ForgotPassword/ForgotPassword.js';
 import Heading from '../components/Heading/Heading.js';
@@ -12,15 +13,22 @@ const buttonTypes = {
 };
 
 function SignIn({ type }) {
-	console.log(buttonTypes);
+	const state = useSelector((state) => state);
+
 	return (
 		<Card>
 			<Heading />
 			<Inputs />
 			<ForgotPassword />
-			<Button type={buttonTypes[type].primary} />
+			<Button
+				type={buttonTypes[type].primary}
+				disabled={state.buttonIsDisabled}
+			/>
 			<Line />
-			<Button type={buttonTypes[type].secondary} />
+			<Button
+				type={buttonTypes[type].secondary}
+				inputsTouched={state.inputsTouched}
+			/>
 		</Card>
 	);
 }

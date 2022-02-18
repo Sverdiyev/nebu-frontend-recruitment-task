@@ -7,7 +7,9 @@ const initialState = {
 	username: '',
 	email: '',
 	password: '',
+	passwordIsShown: false,
 	inputsTouched: false,
+	buttonIsDisabled: false,
 };
 
 const pageSlice = createSlice({
@@ -19,15 +21,26 @@ const pageSlice = createSlice({
 		},
 		setUsername(state, { payload }) {
 			state.inputsTouched = true;
-			state.username = payload.username;
+			state.username = payload;
 		},
 		setPassword(state, { payload }) {
 			state.inputsTouched = true;
-			state.password = payload.password;
+			state.password = payload;
 		},
 		setEmail(state, { payload }) {
 			state.inputsTouched = true;
-			state.email = payload.email;
+			state.email = payload;
+		},
+		setButtonIsDisabled(state, { payload }) {
+			state.buttonIsDisabled = payload;
+		},
+		setPasswordIsShown(state, { payload }) {
+			state.passwordIsShown = payload;
+		},
+		pageReset(state) {
+			state.passwordIsShown = false;
+			state.password = '';
+			state.username = '';
 		},
 	},
 });

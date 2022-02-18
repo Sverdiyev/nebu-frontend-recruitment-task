@@ -40,6 +40,10 @@ const StyledButton = styled.button`
 				`;
 		}
 	}};
+
+	:disabled {
+		background-color: #606060;
+	}
 `;
 
 export default StyledButton;

@@ -1,5 +1,7 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { pageActions } from '../../store/index.js';
 import StyledButton from './Button.styles.js';
 
 const text = {
@@ -9,22 +11,25 @@ const text = {
 	switchToSignIn: 'Switch to Login',
 };
 
-function Button({ type }) {
+function Button({ type, disabled }) {
 	const chosenText = text[type];
+	const dispatch = useDispatch();
 
 	const navigate = useNavigate('/');
 	const pageChangeHandlder = () => {
 		if (type === 'signIn' && type === 'signUp') {
 			return;
 		} else if (type === 'switchToSignIn') {
+			dispatch(pageActions.pageReset());
 			navigate('/login');
 		} else if (type === 'switchToSignUp') {
+			dispatch(pageActions.pageReset());
 			navigate('/signup');
 		}
 	};
 
 	return (
-		<StyledButton $type={type} onClick={pageChangeHandlder}>
+		<StyledButton disabled={disabled} $type={type} onClick={pageChangeHandlder}>
 			{chosenText}
 		</StyledButton>
 	);
