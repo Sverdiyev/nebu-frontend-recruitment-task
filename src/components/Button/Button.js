@@ -1,28 +1,26 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { pageActions } from '../../store/index.js';
+import { useNavigate } from 'react-router-dom';
 import StyledButton from './Button.styles.js';
 
+const text = {
+	signIn: 'Sign in',
+	signUp: 'Sign up',
+	switchToSignUp: 'Switch to Sign up',
+	switchToSignIn: 'Switch to Login',
+};
+
 function Button({ type }) {
-	const text = {
-		signIn: 'Sign in',
-		signUp: 'Sign up',
-		switchToSignUp: 'Switch to Sign up',
-		switchToSignIn: 'Switch to Sign in',
-	};
 	const chosenText = text[type];
 
-	const dispatch = useDispatch();
-	const state = useSelector((state) => state);
-
+	const navigate = useNavigate('/');
 	const pageChangeHandlder = () => {
-		console.log('🚀 ~ pageChangeHandlder ~ type', type);
-		if (type !== 'switchToSignUp' && type !== 'switchToSignIn') return;
-
-		dispatch(pageActions.switchPage());
-
-		console.log(state);
+		if (type === 'signIn' && type === 'signUp') {
+			return;
+		} else if (type === 'switchToSignIn') {
+			navigate('/login');
+		} else if (type === 'switchToSignUp') {
+			navigate('/signup');
+		}
 	};
 
 	return (
