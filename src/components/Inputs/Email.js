@@ -5,26 +5,26 @@ import { pageActions } from '../../store/index.js';
 import InputWarning from '../InputWarining/InputWarning.js';
 import { InputWrapper, StyledInput } from './Input.styles.js';
 
-function Email({ emailIsValid, emailIsTouched }) {
+function Email({ emailIsBlocked }) {
 	const dispatch = useDispatch();
 	const { email } = useSelector((state) => state);
 
 	const [error, setError] = useState(false);
-
 	const onChangeInput = (e) => {
-		emailIsTouched(true);
-		const email = e.target.value.trim();
-		dispatch(pageActions.setEmail(email));
+		const emailInput = e.target.value.trim();
 
-		if (!email) {
-			emailIsValid(false);
+		dispatch(pageActions.setEmail(emailInput));
+
+		if (!emailInput) {
+			emailIsBlocked.current = true;
 			setError(true);
 			return;
 		}
-		setError(false);
 
-		emailIsValid(true);
+		setError(false);
+		emailIsBlocked.current = false;
 	};
+
 	return (
 		<InputWrapper>
 			<StyledInput

@@ -4,32 +4,30 @@ import InputWarning from '../InputWarining/InputWarning';
 import { pageActions } from '../../store/index.js';
 import { useDispatch, useSelector } from 'react-redux';
 
-function Password({ passwordIsValid, passwordIsTouched }) {
+function Password({ passwordIsBlocked }) {
+	const [passwordIsShown, setPasswordIsShown] = useState(false);
+	const [error, setError] = useState(false);
 	const { password } = useSelector((state) => state);
-	const { passwordIsShown } = useSelector((state) => state);
 
 	const dispatch = useDispatch();
 
-	const [error, setError] = useState(false);
-
 	const onChangeInput = (e) => {
-		passwordIsTouched(true);
 		const passwordInput = e.target.value.trim();
 		dispatch(pageActions.setPassword(passwordInput));
 
 		if (!passwordInput) {
-			passwordIsValid(false);
+			passwordIsBlocked.current = true;
 			setError(true);
 			return;
 		}
 		setError(false);
 
-		passwordIsValid(true);
+		passwordIsBlocked.current = false;
 	};
 
 	const onChangeType = () => {
-		if (passwordIsShown) dispatch(pageActions.setPasswordIsShown(false));
-		else if (!passwordIsShown) dispatch(pageActions.setPasswordIsShown(true));
+		if (passwordIsShown) setPasswordIsShown(false);
+		else if (!passwordIsShown) setPasswordIsShown(true);
 	};
 
 	let showText = '';

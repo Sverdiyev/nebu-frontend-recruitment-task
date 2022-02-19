@@ -4,23 +4,23 @@ import { pageActions } from '../../store/index.js';
 import InputWarning from '../InputWarining/InputWarning.js';
 import { InputWrapper, StyledInput } from './Input.styles.js';
 
-function Username({ usernameIsTouched, usernameIsValid }) {
+function Username({ usernameIsBlocked }) {
 	const dispatch = useDispatch();
-	const [error, setError] = useState(false);
 	const { username } = useSelector((state) => state);
 
+	const [error, setError] = useState(false);
+
 	const onChangeInput = (e) => {
-		usernameIsTouched(true);
 		const username = e.target.value.trim();
 		dispatch(pageActions.setUsername(e.target.value));
 
 		if (!username) {
-			usernameIsValid(false);
+			usernameIsBlocked.current = true;
 			setError(true);
 			return;
 		}
 		setError(false);
-		usernameIsValid(true);
+		usernameIsBlocked.current = false;
 	};
 
 	return (
