@@ -6,9 +6,6 @@ const initialState = {
 	username: '',
 	email: '',
 	password: '',
-	passwordIsShown: false,
-	inputsTouched: false,
-	buttonIsDisabled: false,
 	users: [],
 	loggedInUser: null,
 };
@@ -32,9 +29,6 @@ const pageSlice = createSlice({
 		setButtonIsDisabled(state, { payload }) {
 			state.buttonIsDisabled = payload;
 		},
-		setPasswordIsShown(state, { payload }) {
-			state.passwordIsShown = payload;
-		},
 		pageReset(state) {
 			state.passwordIsShown = false;
 			state.password = '';
@@ -54,6 +48,9 @@ const pageSlice = createSlice({
 					return;
 				}
 			}
+		},
+		logout(state) {
+			state.loggedInUser = null;
 		},
 	},
 });
