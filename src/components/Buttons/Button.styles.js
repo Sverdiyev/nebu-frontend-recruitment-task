@@ -27,8 +27,7 @@ const StyledButton = styled.button`
 					box-shadow: 0 0 10px rgba(82, 168, 236, 60%);
 				};
 					`;
-			case 'switchToSignUp':
-			case 'switchToSignIn':
+			case 'switch':
 			default:
 				return `
 				color:#606060;
