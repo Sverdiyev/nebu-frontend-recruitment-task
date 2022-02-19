@@ -1,53 +1,29 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { pageActions } from '../store/index.js';
-import NotAuth from './NotAuth.js';
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 
 function User() {
-	const dispatch = useDispatch();
 	const state = useSelector((state) => state);
 	const navigate = useNavigate();
 
 	const { loggedInUser, users } = state;
+	const { userId } = useParams();
 
-	const user = {};
+	const user = users.filter((item) => item.id === +userId)[0];
 
-	for (let item of users) {
-		if (item.id === loggedInUser) {
-			Object.assign(user, item);
-		}
+	if (!user) {
+		return <div>Error - not found </div>;
 	}
 
-	const logoutHandler = () => {
-		dispatch(pageActions.logout());
-		navigate('/login');
-	};
-
-	if (!loggedInUser) {
-		return <NotAuth />;
-	}
-
-	const followers = user.follow.map((followerID) => {
-		for (let item of users) {
-			if (followerID === item.id)
-				return `${item.username} - user Id: ${item.id}`;
-		}
-	});
-
-	const followersText = followers.length
-		? followers.join(', ')
-		: 'No followers yet';
+	if (!loggedInUser) navigate('/not-authorized');
 
 	return (
 		<div>
 			<ul>
 				<li>User ID:{user.id}</li>
+				<li>Username:{user.username}</li>
 				<li>User email:{user.email}</li>
-				<li>User followers:{followersText}</li>
 			</ul>
-
-			<button onClick={logoutHandler}> Log Out</button>
 		</div>
 	);
 }

@@ -14,7 +14,7 @@ function SignUp() {
 	const inputsTouched = useRef(false);
 	const emailIsBlocked = useRef(false);
 	const usernameIsBlocked = useRef(false);
-	const passwordIsBlocked = useRef(false); //would like to use ref not to cause extra re-renders
+	const passwordIsBlocked = useRef(false);
 
 	//! FIXME disabling
 	const change =

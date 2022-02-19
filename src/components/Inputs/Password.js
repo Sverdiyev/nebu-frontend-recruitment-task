@@ -15,7 +15,8 @@ function Password({ passwordIsBlocked }) {
 		const passwordInput = e.target.value.trim();
 		dispatch(pageActions.setPassword(passwordInput));
 
-		if (!passwordInput) {
+		const invalidPassword = passwordInput.trim().length < 6;
+		if (!passwordInput || invalidPassword) {
 			passwordIsBlocked.current = true;
 			setError(true);
 			return;

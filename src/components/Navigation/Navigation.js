@@ -17,13 +17,13 @@ function Navigation() {
 	return (
 		<StyledNav>
 			<ul>
-				<NavLink to='/users'>
+				<NavLink to='/users' end>
 					<li>Users</li>
 				</NavLink>
-				<NavLink to={`/users/${loggedInUser}`}>
+				<NavLink to={`/users/${loggedInUser}`} end>
 					<li>Me</li>
 				</NavLink>
-				<NavLink to={`/users/${loggedInUser}/follow`}>
+				<NavLink to={`/users/${loggedInUser}/follow`} end>
 					<li>Following</li>
 				</NavLink>
 				<NavLink to=''>

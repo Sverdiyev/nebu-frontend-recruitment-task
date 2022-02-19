@@ -13,36 +13,27 @@ function Login({ type }) {
 	const state = useSelector((state) => state);
 
 	const [buttonIsDisabled, setButtonIsDisabled] = useState(false);
-	const emailIsBlocked = useRef(false);
-	const passwordIsBlocked = useRef(false); //true == disabled
-	// const allInputsShouldBeOk = useRef(false);
+	const [emailIsBlocked, setEmailIsBlocked] = useState(false);
 
-	const inputsTouched = useRef(false); // false == enabled
+	const passwordIsBlocked = useRef(false);
+
 	const firstRender = useRef(true);
 
-	//true => disabled
-	const inputsInvalid =
-		emailIsBlocked.current || // true
-		passwordIsBlocked.current; // true
+	const inputsInvalid = emailIsBlocked || passwordIsBlocked.current;
 
 	useEffect(() => {
 		if (!firstRender.current) {
-			inputsTouched.current = true;
-			// allInputsShouldBeOk.current = true;
-
 			setButtonIsDisabled(inputsInvalid);
 		}
 		firstRender.current = false;
 	}, [inputsInvalid]);
 
-	if (state.loggedInUser) {
-		return <h1>You are already logged in :)</h1>;
-	}
+	if (state.loggedInUser) return <h1>You are already logged in :)</h1>;
 
 	return (
 		<Card>
 			<Heading />
-			<Email emailIsBlocked={emailIsBlocked} />
+			<Email emailIsBlocked={setEmailIsBlocked} />
 			<Password passwordIsBlocked={passwordIsBlocked} />
 			<ForgotPassword />
 			<SignInButton disabled={buttonIsDisabled} />

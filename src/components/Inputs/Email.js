@@ -10,19 +10,25 @@ function Email({ emailIsBlocked }) {
 	const { email } = useSelector((state) => state);
 
 	const [error, setError] = useState(false);
-	const onChangeInput = (e) => {
+
+	const onInputBlur = (e) => {
 		const emailInput = e.target.value.trim();
 
-		dispatch(pageActions.setEmail(emailInput));
+		const validInput = validateEmailOrPhone(emailInput);
 
-		if (!emailInput) {
-			emailIsBlocked.current = true;
+		if (!validInput) {
+			emailIsBlocked(true);
 			setError(true);
 			return;
 		}
 
 		setError(false);
-		emailIsBlocked.current = false;
+		emailIsBlocked(false);
+	};
+
+	const onInputChange = (e) => {
+		const emailInput = e.target.value.trim();
+		dispatch(pageActions.setEmail(emailInput));
 	};
 
 	return (
@@ -30,14 +36,37 @@ function Email({ emailIsBlocked }) {
 			<StyledInput
 				type='email'
 				placeholder='Email or Phone'
-				onChange={onChangeInput}
+				onBlur={onInputBlur}
+				onChange={onInputChange}
 				value={email}
 			/>
 			<InputWarning error={error}>
-				please enter valid email or phone{' '}
+				Please enter valid email or phone
 			</InputWarning>
 		</InputWrapper>
 	);
 }
 
+// [0-9] @
+
 export default Email;
+
+const validateEmail = (email) => {
+	return String(email)
+		.toLowerCase()
+		.match(
+			/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+		);
+};
+const validatePhone = (phone) => {
+	return String(phone)
+		.toLowerCase()
+		.match(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im);
+};
+
+function validateEmailOrPhone(input) {
+	// return true;
+	const validEmail = validateEmail(input);
+	const validPhone = validatePhone(input);
+	return !!(validEmail || validPhone);
+}

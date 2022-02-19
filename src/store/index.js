@@ -8,6 +8,7 @@ const initialState = {
 	password: '',
 	users: [],
 	loggedInUser: null,
+	error: { text: '' },
 };
 
 const pageSlice = createSlice({
@@ -17,14 +18,17 @@ const pageSlice = createSlice({
 		setUsername(state, { payload }) {
 			state.inputsTouched = true;
 			state.username = payload;
+			state.error.text = '';
 		},
 		setPassword(state, { payload }) {
 			state.inputsTouched = true;
 			state.password = payload;
+			state.error.text = '';
 		},
 		setEmail(state, { payload }) {
 			state.inputsTouched = true;
 			state.email = payload;
+			state.error.text = '';
 		},
 		setButtonIsDisabled(state, { payload }) {
 			state.buttonIsDisabled = payload;
@@ -40,7 +44,6 @@ const pageSlice = createSlice({
 		login(state) {
 			for (let user of current(state.users)) {
 				if (user.email === state.email && user.password === state.password) {
-					console.log('logged in ');
 					state.loggedInUser = user.id;
 					state.username = '';
 					state.password = '';
@@ -51,6 +54,9 @@ const pageSlice = createSlice({
 		},
 		logout(state) {
 			state.loggedInUser = null;
+		},
+		setError(state, { payload }) {
+			state.error.text = payload;
 		},
 	},
 });
