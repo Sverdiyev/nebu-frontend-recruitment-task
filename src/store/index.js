@@ -1,24 +1,22 @@
-import { configureStore, createSlice } from '@reduxjs/toolkit';
+import { configureStore, createSlice, current } from '@reduxjs/toolkit';
 
 // to add: logged in User, followed users,
 
 const initialState = {
-	isAuth: false,
 	username: '',
 	email: '',
 	password: '',
 	passwordIsShown: false,
 	inputsTouched: false,
 	buttonIsDisabled: false,
+	users: [],
+	loggedInUser: null,
 };
 
 const pageSlice = createSlice({
-	name: 'login',
+	name: 'page',
 	initialState,
 	reducers: {
-		login(state) {
-			state.isAuth = true;
-		},
 		setUsername(state, { payload }) {
 			state.inputsTouched = true;
 			state.username = payload;
@@ -41,6 +39,21 @@ const pageSlice = createSlice({
 			state.passwordIsShown = false;
 			state.password = '';
 			state.username = '';
+		},
+		setUsers(state, { payload }) {
+			state.users = payload;
+		},
+		login(state) {
+			for (let user of current(state.users)) {
+				if (user.email === state.email && user.password === state.password) {
+					console.log('logged in ');
+					state.loggedInUser = user.id;
+					state.username = '';
+					state.password = '';
+					state.email = '';
+					return;
+				}
+			}
 		},
 	},
 });

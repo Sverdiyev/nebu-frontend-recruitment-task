@@ -5,7 +5,7 @@
 			"username": "John Smith",
 			"email": "john.smith@gmail.com",
 			"password": "john@123",
-			"follow": [2,3]
+			"follow": [2, 3]
 		},
 		{
 			"id": 2,
@@ -20,6 +20,13 @@
 			"email": "cathy.lee@gmail.com",
 			"password": "cathy@123",
 			"follow": [1]
+		},
+		{
+			"id": 5,
+			"username": "5",
+			"email": "5",
+			"password": "5",
+			"follow": [1]
 		}
-	] 
+	]
 }

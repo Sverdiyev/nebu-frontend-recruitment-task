@@ -1,24 +1,25 @@
-// import { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import login from './login.png';
 import SignIn from './pages/SignIn.js';
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { pageActions } from './store/index.js';
+import User from './pages/User.js';
 
 function App() {
-	/**
-	 * open console to see how backend is structured
-	 */
-	// useEffect(() => {
-	// 	fetch('/users')
-	// 		.then((res) => res.json())
-	// 		.then(console.log);
-	// }, []);
-
+	const dispatch = useDispatch();
+	useEffect(() => {
+		fetch('/users')
+			.then((res) => res.json())
+			.then((d) => dispatch(pageActions.setUsers(d)));
+	}, [dispatch]);
 	return (
 		<>
 			<Routes>
 				<Route path='login' element={<SignIn type='signIn' />} />
 				<Route path='signup' element={<SignIn type='signUp' />} />
+				<Route path='user' element={<User />} />
 				<Route path='/' element={<Navigate to='/login' />} />
 				<Route path='*' element={<div>ERROR 404 - not found </div>} />
 			</Routes>

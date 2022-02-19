@@ -17,7 +17,13 @@ function Button({ type, disabled }) {
 
 	const navigate = useNavigate('/');
 	const pageChangeHandlder = () => {
-		if (type === 'signIn' && type === 'signUp') {
+		navigate('/user');
+
+		if (type === 'signIn') {
+			dispatch(pageActions.login());
+
+			navigate('/user');
+		} else if (type === 'signUp') {
 			return;
 		} else if (type === 'switchToSignIn') {
 			dispatch(pageActions.pageReset());
