@@ -1,4 +1,4 @@
-import { configureStore, createSlice, current } from '@reduxjs/toolkit';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
 
 // to add: logged in User, followed users,
 
@@ -41,16 +41,11 @@ const pageSlice = createSlice({
 		setUsers(state, { payload }) {
 			state.users = payload;
 		},
-		login(state) {
-			for (let user of current(state.users)) {
-				if (user.email === state.email && user.password === state.password) {
-					state.loggedInUser = user.id;
-					state.username = '';
-					state.password = '';
-					state.email = '';
-					return;
-				}
-			}
+		login(state, { payload }) {
+			state.loggedInUser = payload;
+			state.username = '';
+			state.password = '';
+			state.email = '';
 		},
 		logout(state) {
 			state.loggedInUser = null;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -9,12 +9,21 @@ function SignInButton({ disabled, startedTyping }) {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
+	function validateLogin() {
+		const result = state.users.find(
+			(user) => user.email === state.email && user.password === state.password
+		);
+		return result ? result.id : null;
+	}
+
 	const state = useSelector((state) => state);
 	const onClickHandler = () => {
-		dispatch(pageActions.login());
+		const loggedInUser = validateLogin();
 
-		if (state.loggedInUser) navigate('/users');
-		else {
+		if (loggedInUser) {
+			dispatch(pageActions.login(loggedInUser));
+			navigate(`/users/${loggedInUser}`);
+		} else {
 			dispatch(pageActions.pageReset());
 			dispatch(pageActions.setError('Invalid credentials'));
 		}
