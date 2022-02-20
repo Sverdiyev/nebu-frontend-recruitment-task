@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 function User() {
 	const state = useSelector((state) => state);
@@ -24,6 +24,7 @@ function User() {
 				<li>Username:{user.username}</li>
 				<li>User email:{user.email}</li>
 			</ul>
+			{loggedInUser === +userId && <Link to='follow'>See who you follow</Link>}
 		</div>
 	);
 }

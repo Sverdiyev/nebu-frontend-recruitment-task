@@ -65,7 +65,6 @@ const validatePhone = (phone) => {
 };
 
 function validateEmailOrPhone(input) {
-	// return true;
 	const validEmail = validateEmail(input);
 	const validPhone = validatePhone(input);
 	return !!(validEmail || validPhone);
