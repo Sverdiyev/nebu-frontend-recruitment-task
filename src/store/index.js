@@ -1,7 +1,5 @@
 import { configureStore, createSlice } from '@reduxjs/toolkit';
 
-// to add: logged in User, followed users,
-
 const initialState = {
 	username: '',
 	email: '',

@@ -9,4 +9,7 @@ export const HeadingWrapper = styled.div`
 		color: black;
 		font-size: 11px;
 	}
+	& > span {
+		color: red;
+	}
 `;

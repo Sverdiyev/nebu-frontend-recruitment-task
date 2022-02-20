@@ -57,6 +57,4 @@ export class SpiralSort {
 		console.log('🚀 ~ sort ~ result', result);
 		return result;
 	}
-
-	moveHorizontal(row) {}
 }

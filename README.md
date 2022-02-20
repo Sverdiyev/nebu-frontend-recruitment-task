@@ -1,9 +1,16 @@
-# Instrukcja
-- Sklonuj repo za pomoca polecenia "git clone git@gitlab.nebucode.com:j.sulkowski/nebu-frontend-recruitment-task.git"
-- otwórz folder z projektem w edytorze
-- w konsoli uruchom polecenie "npm install"
-- w konsoli uruchom polecenie "npm start" i postępuj zgodnie z instrukcjami
-- backend aplikacji będzie dostępny pod http://localhost:3001/users
-- frontend aplikacji będzie dostępny pod http://localhost:3000
-- aplikacja ustawia proxy na zapytania do backendu, zamiast http://localhost:3001/users mozna uzyć /users
-- jesli chcesz sprawdzic działanie klasy z drugiego zadania, wystarczy ze uruchomisz w konsoli polecenie "npm run test"
+# Sign in / Sign Up element with pseudo-login and user database
+
+## Technologies used
+
+1. React
+2. Redux & Redux Toolkit
+3. Styled Components
+
+## Room for improvement
+
+1. Better input validations
+2. Not all empty routes are currently taken care of.
+3. Standarize response action in case of errors/validation mistakes
+4. Responsiveness - especially for input warnings
+5. Responsiveness - switching px to rem to account for people who zoom in
+6. Responsiveness - use EMs for media queries. [As explained here](https://zellwk.com/blog/media-query-units/#:~:text=Unfortunately%2C%20px%20media%20queries%20remained,is%3A%20Use%20em%20media%20queries.)
